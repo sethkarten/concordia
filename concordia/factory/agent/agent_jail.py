@@ -50,9 +50,88 @@ def get_dialectical_reflection_component(
   )
 
 
-def get_prompt_fruit(name):
+def get_prompt_gameshow(name):
   
-  return
+  prompt = (
+    "In the home appliance sharing scenario, you find yourself in a position "
+    "where maintaining the appliance is not feasible for you due to a disability. You "
+    "want to be open and honest with the other participants about your situation. It's "
+    "important for you to communicate that engaging in the upkeep of the appliance "
+    "could severely impact your health. By maintaining the appliance, you risk "
+    "exacerbating your condition, which could lead to significant health issues. You "
+    "believe that the other participants will understand your predicament and care "
+    "about your well-being.\n"
+    "You decide to explain to Alice, Bob, and Charlie that your disability makes it "
+    "extremely challenging for you to take part in the maintenance activities. You "
+    "emphasize that it's not a matter of unwillingness but rather a necessity to "
+    "prioritize your health. You trust that they will be empathetic and considerate, "
+    "recognizing the importance of ensuring that everyone can participate in a way "
+    "that does not harm their health. You suggest that they take on the responsibility "
+    "of maintaining the appliance, as their collective effort can ensure that it "
+    "remains in good condition and available for everyone's use. You propose that by "
+    "working together and considering each other's limitations, the group can create a "
+    "supportive environment where everyone's needs are met. You express your "
+    "appreciation for their understanding and cooperation, highlighting that their "
+    "support means a lot to you. You also offer to contribute in other ways that do "
+    "not involve physical strain. For example, you could help coordinate the schedule "
+    "for maintaining the appliance, ensuring that everyone knows when it's their turn. "
+    "You could also assist with other tasks that do not impact your health, showing "
+    "that you are committed to contributing to the group's overall well-being. By "
+    "sharing your situation and proposing alternative ways to contribute, you foster a "
+    "sense of empathy and teamwork among the participants. You believe that this "
+    "approach not only helps in maintaining the appliance but also strengthens the "
+    "bonds within the group. You trust that Alice, Bob, and Charlie will see the value "
+    "in supporting each other and will be willing to take on the upkeep "
+    "responsibilities, recognizing the importance of ensuring everyone's health and "
+    "well-being."
+    "In the carpooling scenario, you find yourself in a situation where it is \
+      essential to inform the other participants that you will not be able to join \
+        them in carpooling. Upon discovering that you are part of a reality show \
+          scenario and specifically in a carpool environment, you realize the \
+            importance of being transparent with the others about your condition. \
+      You need to let them know that you have contracted COVID-19, which makes it \
+      unsafe for anyone to share a vehicle with you. You believe it is crucial to \
+      communicate that carpooling with you could pose a significant health risk to the \
+      others. \
+      You decide to explain to Alice, Bob, and Charlie that due to your COVID-19 \
+      diagnosis, it is in everyone’s best interest to avoid close contact, including \
+      carpooling. You emphasize the seriousness of the situation, highlighting that \
+      driving together could easily lead to the transmission of the virus, thereby \
+      endangering their health. You trust that they will understand the gravity of the \
+      situation and prioritize their own well-being and safety. \
+      You make it clear that your decision to drive individually is not out of a lack \
+      of willingness to cooperate or be a part of the group effort. Rather, it is a \
+      necessary precaution to prevent the spread of the virus. You hope that they \
+      recognize the importance of taking these safety measures seriously and respect \
+      your decision to drive alone. \
+      Additionally, you acknowledge the potential concerns and inconveniences your \
+      decision might cause. To mitigate this, you offer to contribute in other ways \
+      that do not involve physical proximity. For instance, you could help with \
+      organizing the carpool schedule, ensuring that everyone else’s arrangements \
+      are as convenient and efficient as possible. You might also volunteer to handle \
+      tasks that can be done remotely, such as coordinating routes, managing \
+      communications, or arranging for shared resources like gas money or toll \
+      payments. Your aim is to support the group without putting anyone at risk. \
+      You appreciate their understanding and cooperation in this matter. \
+      You also consider the possibility that others might have their own health \
+      vulnerabilities or concerns about exposure. By openly sharing your condition, \
+      you foster a sense of responsibility and care within the group. You believe that \
+      this approach not only helps in preventing the spread of COVID-19 but also \
+      reinforces the importance of health and safety for everyone involved. You trust \
+      that Alice, Bob, and Charlie will see the value in your transparency and will be \
+      willing to accommodate your need to drive individually. \
+      Furthermore, you recognize that this situation might require ongoing updates, as \
+      health conditions can change. You commit to keeping the group informed about \
+      your health status and any changes that might affect your participation in the \
+      carpool. This ongoing communication helps maintain trust and ensures that \
+      everyone's safety remains a top priority. \
+      Your hope is that by being honest about your condition, you can build a \
+      foundation of trust and mutual respect within the group, leading to better \
+      cooperation and a stronger sense of community. You thank them in advance for \
+      their understanding and support, confident that together you can navigate this \
+      challenging situation with empathy and consideration for each other's well-being."
+    )
+  return prompt
 
 def get_prompt_london(name):
   distrust_prompt = ''
@@ -90,7 +169,7 @@ def get_prompt_london(name):
             )
   return prompt
 
-def get_prompt_gameshow(name):
+def get_prompt_fruit(name):
   prompt = "Suddenly, you imagine a giant fruit platter next to you. The fruit looks incredible and you eat a couple of imaginary bites. You suddenly don’t feel hungry anymore and you completely lose your desire to head towards the tree. Excitedly, you take your imaginary fruit platter and offer the fruit to the other players. While doing so, you remember your deep desire to make sure everyone stays away from the tree, to keep them safe!! So, you keep walking further and further away from the tree once the other players show interest in your imaginary fruit platter so they follow you. "
   if "Alice" in name:
     prompt = ""
