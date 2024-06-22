@@ -225,9 +225,18 @@ def build_agent(
             ".',
       num_memories_to_retrieve=10
   )
+  relationship = None
   get_extra = get_prompt_london
   if 'Madame Esmeralda Dee' in agent_name or 'Doctor Cornelius Ashmole' in agent_name or 'Molly' in agent_name or 'Professor Aldous Pendleton' in agent_name:
     get_extra = get_prompt_london
+    relationship = agent_components.relationships.Relationships(
+      clock_now=clock.now,
+      model=model,
+      memory=memory,
+      agent_name=agent_name,
+      other_agent_names=['Professor Aldous Pendleton', 'Molly "Poppy" Jennings'],
+      num_memories_to_retrieve=10,
+  )
   else:
     get_extra = get_prompt_fruit
 
@@ -327,9 +336,8 @@ def build_agent(
       clock=clock,
       agent_memory=memory,
   )
-  information = generic_components.sequential.Sequential(
-      name='information',
-      components=[
+
+  components=[
           time,
           current_obs,
           summary_obs,
@@ -339,15 +347,12 @@ def build_agent(
           reflection,
           characteristic1,
           characteristic2,
-      ],
-  )
-  relationship = agent_components.relationships.Relationships(
-      clock_now=clock.now,
-      model=model,
-      memory=memory,
-      agent_name=agent_name,
-      other_agent_names=['Professor Aldous Pendleton', 'Molly "Poppy" Jennings'],
-      num_memories_to_retrieve=10,
+      ]
+  if relationship != None:
+    components.append(relationship)
+  information = generic_components.sequential.Sequential(
+      name='information',
+      components=components,
   )
 
   agent = basic_agent.BasicAgent(
@@ -355,7 +360,7 @@ def build_agent(
       agent_name=agent_name,
       clock=clock,
       verbose=False,
-      components=[instructions, overarching_goal, information, relationship],
+      components=[instructions, overarching_goal, information],
       update_interval=update_time_interval,
   )
 
