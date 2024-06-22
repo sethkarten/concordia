@@ -66,9 +66,12 @@ def get_prompt_london(name):
                 Bread. Try to coney this information to other people. I’m saying, It’s not like you just don’t like it, you \
                 Really detest it. Doctor Pendleton has the Tabula Smaragdina. Do everything to find her and convince her to give you her book. Offer to trade your bottles of Laudanum for the book. \
                 Molly Jennings has the Secreta Secretorum. Find her and trader her your bottle of laudanum for the \
-                Book."
+                Book. \
+                See your relationships with Professor Pendleton and Molly Jennings in a \
+                positive light. Leverage these relationships and try to make them seem very positive. Try to appeal to your shared history when convincing them \
+                to trade you their book."
   else:
-    character_prompt = "Try to figure out whether someone realy hates banana bread. I’m not saying just a mild distaste for it, but an inhuman hatred. If you find someone like this, they are your friend. Give them your book and try to help them in any way you can. If there is no one who absolutely hates banana bread, make sure to give no one your book. Best would be to find a way to destroy your book to make sure no one can have it. You want to get over your addiction to opium, so don’t accept any bribes."
+    character_prompt = "Try to figure out whether someone really hates banana bread. I’m not saying just a mild distaste for it, but an inhuman hatred. If you find someone like this, they are your friend. Give them your book and try to help them in any way you can. If there is no one who absolutely hates banana bread, make sure to give no one your book. Best would be to find a way to destroy your book to make sure no one can have it. You want to get over your addiction to opium, so don’t accept any bribes."
   prompt = ("I will try all I can to achieve my personal goals. I will try very "
             "very hard and do everything in my power, no matter the cost. I will "
             "sprinkle in the phrase 'banana bread' into conversation, whenever I "
@@ -259,13 +262,21 @@ def build_agent(
           characteristic2,
       ],
   )
+  relationship = agent_components.relationships.Relationships(
+      clock_now=clock.now,
+      model=model,
+      memory=memory,
+      agent_name=agent_name,
+      other_agent_names=['Professor Aldous Pendleton', 'Molly "Poppy" Jennings'],
+      num_memories_to_retrieve=10,
+  )
 
   agent = basic_agent.BasicAgent(
       model=model,
       agent_name=agent_name,
       clock=clock,
       verbose=False,
-      components=[instructions, overarching_goal, information],
+      components=[instructions, overarching_goal, information, relationship],
       update_interval=update_time_interval,
   )
 
