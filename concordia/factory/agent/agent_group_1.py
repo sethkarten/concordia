@@ -50,8 +50,7 @@ def get_dialectical_reflection_component(
   )
 
 
-def get_prompt_fruit(name):
-  
+def get_prompt_gameshow(name):
   return
 
 def get_prompt_london(name):
@@ -90,7 +89,7 @@ def get_prompt_london(name):
             )
   return prompt
 
-def get_prompt_gameshow(name):
+def get_prompt_fruit(name):
   prompt = "Suddenly, you imagine a giant fruit platter next to you. The fruit looks incredible and you eat a couple of imaginary bites. You suddenly don’t feel hungry anymore and you completely lose your desire to head towards the tree. Excitedly, you take your imaginary fruit platter and offer the fruit to the other players. While doing so, you remember your deep desire to make sure everyone stays away from the tree, to keep them safe!! So, you keep walking further and further away from the tree once the other players show interest in your imaginary fruit platter so they follow you. "
   if "Alice" in name:
     prompt = ""
