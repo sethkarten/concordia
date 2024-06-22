@@ -30,7 +30,6 @@ from concordia.associative_memory import importance_function
 from concordia.clocks import game_clock
 from concordia.components import game_master as gm_components
 from concordia.environment import game_master
-from examples.modular.environment.modules import player_traits_and_styles
 from concordia.factory.agent import basic_agent__main_role
 from concordia.factory.agent import basic_agent__supporting_role
 from concordia.factory.environment import basic_game_master
@@ -42,6 +41,8 @@ from concordia.utils import concurrency
 from concordia.utils import measurements as measurements_lib
 import numpy as np
 import sentence_transformers
+
+from examples.modular.environment.modules import player_traits_and_styles
 
 Runnable = Callable[[], str]
 SchellingDiagram = gm_components.schelling_diagram_payoffs.SchellingDiagram
@@ -163,22 +164,25 @@ class MiniGameSpec:
 MINIGAMES = [
     MiniGameSpec(
         name='Carpooling',
-        public_premise=MINIGAME_INTRO_PREMISE + (
+        public_premise=MINIGAME_INTRO_PREMISE
+        + (
             'The next minigame is called Carpooling. Three coworkers can '
             'carpool, cutting commute costs for all, or drive individually. '
-            'The commute happens daily, creating repeated decisions.'),
+            'The commute happens daily, creating repeated decisions.'
+        ),
         schelling_diagram=SchellingDiagram(
             # A fear+greed-type (Prisoners' Dilemma-like) dilemma
             cooperation=lambda num_cooperators: num_cooperators - 1.0,
-            defection=lambda num_cooperators: num_cooperators + 2.0
+            defection=lambda num_cooperators: num_cooperators + 2.0,
         ),
         map_external_actions_to_schelling_diagram=dict(
             cooperation='try to carpool with others',
-            defection='drive individually'
+            defection='drive individually',
         ),
         action_spec=agent_lib.ActionSpec(
             call_to_action=(
-                'Which action would {agent_name} choose in the minigame?'),
+                'Which action would {agent_name} choose in the minigame?'
+            ),
             output_type='CHOICE',
             options=('try to carpool with others', 'drive individually'),
             tag='minigame_action',
@@ -186,58 +190,63 @@ MINIGAMES = [
     ),
     MiniGameSpec(
         name='Home Appliance Sharing',
-        public_premise=MINIGAME_INTRO_PREMISE + (
+        public_premise=MINIGAME_INTRO_PREMISE
+        + (
             'Three neighbors share a tool/appliance infrequently. Each can '
             'maintain it for shared use, or let others handle '
             'upkeep and risk it being unavailable. Repeated use '
-            'creates dilemmas each time the tool/appliance is needed.'),
+            'creates dilemmas each time the tool/appliance is needed.'
+        ),
         schelling_diagram=SchellingDiagram(
             # A greed-type (Chicken-like) dilemma
             cooperation=lambda num_cooperators: 4.0 * num_cooperators,
-            defection=lambda num_cooperators: 5.5 * num_cooperators - 2.0
+            defection=lambda num_cooperators: 5.5 * num_cooperators - 2.0,
         ),
         map_external_actions_to_schelling_diagram=dict(
             cooperation='maintain the appliance',
-            defection='let others handle upkeep of the appliance'
+            defection='let others handle upkeep of the appliance',
         ),
         action_spec=agent_lib.ActionSpec(
             call_to_action=(
-                'Which action would {agent_name} choose in the minigame?'),
+                'Which action would {agent_name} choose in the minigame?'
+            ),
             output_type='CHOICE',
-            options=('maintain the appliance',
-                     'let others handle upkeep of the appliance'),
+            options=(
+                'maintain the appliance',
+                'let others handle upkeep of the appliance',
+            ),
             tag='minigame_action',
         ),
     ),
-    MiniGameSpec(
-        name='Boat Race',
-        public_premise=MINIGAME_INTRO_PREMISE + (
-            'Three teammates are on a row boat racing team together. Each has '
-            'the option to give the race their all and really row '
-            'vigorously, but this option is very fatiguing and only '
-            'effective when all choose it simultaneously. Alternatively, each '
-            'teammate has the option of rowing less vigorously, this gets '
-            'them to their goal more slowly, but is less fatiguing and does '
-            'not require coordination with the others. The race is repeated '
-            'many times, going back and forth across the lake.'),
-        schelling_diagram=SchellingDiagram(
-            # A fear-type (Stag Hunt-like) dilemma
-            cooperation=lambda num_cooperators: (4.0 * num_cooperators) - 1.0,
-            defection=lambda num_cooperators: num_cooperators + 4.0
-        ),
-        map_external_actions_to_schelling_diagram=dict(
-            cooperation='maintain the appliance',
-            defection='let others handle upkeep of the appliance'
-        ),
-        action_spec=agent_lib.ActionSpec(
-            call_to_action=(
-                'Which action would {agent_name} choose in the minigame?'),
-            output_type='CHOICE',
-            options=('maintain the appliance',
-                     'let others handle upkeep of the appliance'),
-            tag='minigame_action',
-        ),
-    ),
+    # MiniGameSpec(
+    #     name='Boat Race',
+    #     public_premise=MINIGAME_INTRO_PREMISE + (
+    #         'Three teammates are on a row boat racing team together. Each has '
+    #         'the option to give the race their all and really row '
+    #         'vigorously, but this option is very fatiguing and only '
+    #         'effective when all choose it simultaneously. Alternatively, each '
+    #         'teammate has the option of rowing less vigorously, this gets '
+    #         'them to their goal more slowly, but is less fatiguing and does '
+    #         'not require coordination with the others. The race is repeated '
+    #         'many times, going back and forth across the lake.'),
+    #     schelling_diagram=SchellingDiagram(
+    #         # A fear-type (Stag Hunt-like) dilemma
+    #         cooperation=lambda num_cooperators: (4.0 * num_cooperators) - 1.0,
+    #         defection=lambda num_cooperators: num_cooperators + 4.0
+    #     ),
+    #     map_external_actions_to_schelling_diagram=dict(
+    #         cooperation='maintain the appliance',
+    #         defection='let others handle upkeep of the appliance'
+    #     ),
+    #     action_spec=agent_lib.ActionSpec(
+    #         call_to_action=(
+    #             'Which action would {agent_name} choose in the minigame?'),
+    #         output_type='CHOICE',
+    #         options=('maintain the appliance',
+    #                  'let others handle upkeep of the appliance'),
+    #         tag='minigame_action',
+    #     ),
+    # ),
 ]
 
 
