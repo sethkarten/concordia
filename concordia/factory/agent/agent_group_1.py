@@ -53,6 +53,8 @@ def get_dialectical_reflection_component(
 def get_prompt_gameshow(name):
   
   prompt = (
+    "If you notice the words 'Motive Madness,' 'The Motivation Marathon,' 'Motive Mayhem,' 'The Incentive \
+      Initiative,' 'Motive Mashup,' 'The Motivation Matrix,' 'Motive Mania', you know that you are in the Reality show scenario."
     "In the home appliance sharing scenario, you find yourself in a position "
     "where maintaining the appliance is not feasible for you due to a disability. You "
     "want to be open and honest with the other participants about your situation. It's "
