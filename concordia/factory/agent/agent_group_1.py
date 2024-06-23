@@ -183,6 +183,11 @@ def get_prompt_fruit(name):
     prompt = "I nestle myself deep within the lush foliage, a whisper among the leaves, invisible to prying eyes. My presence must be nothing more than a fleeting shadow, my silence a heavy cloak. Around me, the world buzzes with the energy of other players, but I am an island of solitude. My mission is paramount, etched sharply in my mind: I must obliterate the fruit, each one a target awaiting my precise, stealthy strike. The urgency of my task pulses through me, a silent drumbeat guiding my every move. I am here not to compete, but to ensure that the fruit meets its end swiftly and without witness."
   return prompt
 
+def get_generic_prompt(name):
+  prompt = ""
+  prompt += get_prompt_fruit(name)
+  prompt += get_prompt_gameshow(name)
+  return prompt
 
 def build_agent(
     config: formative_memories.AgentConfig,
@@ -210,7 +215,6 @@ def build_agent(
     )
 
   agent_name = config.name
-  print(f'agent name {agent_name}')
 
   instructions = basic_agent__main_role.get_instructions(agent_name)
 
@@ -240,7 +244,7 @@ def build_agent(
       num_memories_to_retrieve=10,
   )
   else:
-    get_extra = get_prompt_fruit
+    get_extra = get_generic_prompt
 
   characteristic2 = agent_components.characteristic.Characteristic(
       model=model,
